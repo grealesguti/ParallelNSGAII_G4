@@ -51,16 +51,16 @@ About the input parameters
 4. ncon: Number of constraints
 5. nreal: Number of real design variables
 6. lines (6->6+nreal)min_realvar[i]: minimum value of 'i' real variable  max_realvar[i]: maximum value of 'i' real variable (space separation)
-7. pcross_real: probability of crossover of real variable
+7. pcross_real: probability of crossover of real variable (TODO)
 8. pmut_real: probability of mutation of real variable It is recommended each decision variable is mutated with a probability of 1 / L, where L is the number of decision variables. This results in one mutation per offspring on average.
-9. eta_c: distribution index for real variable SBX crossover
-10. eta_m: distribution index for real variable polynomial mutation
+9. eta_c: distribution index for real variable SBX crossover (TODO)
+10. eta_m: distribution index for real variable polynomial mutation (TODO)
 11. nbin: number of binary variables
 12. nbits[i]: number of bits for i^{th} binary variable
 13. (lines 13+nreal->13+nreal+nbits) min_binvar[i]: minimum value of i^{th} binary variable max_binvar[i]: maximum value of i^{th} binary variable (space separation)
 14. pcross_bin: probability of crossover for binary variable
 15. pmut_bin: probability of mutation for binary variable
-16. problem definition: -t x for one of the test problems or -f <shared_library.in> funcname for a custom problem. Where x in is the index for the test problem and  <shared_library.in> is the path to the shared library, and funcname is the name of the function for the problem definition. The following are the indexes for the test problems
+16. problem definition: -t x for one of the test problems or -f <shared_library.in> funcname for a custom problem. Where x in is the index for the test problem and  <shared_library.in> is the path to the shared library, and funcname is the name of the function for the problem definition. The following are the indexes for the test problems (Multi-Objective Optimization using Evolutionary Algorithms, Kalyanmoy Deb, Wiley 2001, Section 8.4 Comparison of Multi-Objective Evolutionary Algorithms [https://www.academia.edu/33099123/Deb_2001_Multi_Objective_Optimization_Using_Evolutionary_Algorithms])
     * 0 = SCH1
     * 1 = SCH2
     * 2 = FON
@@ -101,13 +101,21 @@ How to create your own problem definition
 ---------------------------------------------------------------------------
 The files "problemdef.h & problemdef.c" contain the problem header and definition. First copy one of the definitions of the header and change its name, define it at the begining of the .c file and create a new function defintion. The variables used in these functions are:
 	
-* xreal[i]		: 
+* xreal[i]		: 'i' design variable
 * nobj        		: number of objective values
 * obj[i]      		: 'i' objective value
 * ncon        		: number of constraint values
 * constr[i]   	: 'i' constraint value
 * optionalArgs	: Other arguments passed by input file in vectorial string format (vector<string>&)	
 	
+Once the function has been defined we need to apply a numerical argument or value to the function in parallelnsga2r.cpp.
+
+	case i { problemDefinition = &test_problem_name} break;
+
+If this is not defined, the default problem (sch1) will be used.
+
+When writing the input file we must be careful with the following points:
+* If we ask for less xxx than xxx no warning is given
 
 The following points need to be kept in mind while writing the objective and constraint
 functions.

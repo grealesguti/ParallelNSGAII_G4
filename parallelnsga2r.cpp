@@ -249,9 +249,14 @@ void setProblemDefinitionFromIndex(int problemIndex)
         problemDefinition = &test_problem_ctp8;
       }
       break;
+    case 24:
+      {
+        problemDefinition = &test_problem_ctp8;
+      }
+      break;
     default:
       {
-        problemDefinition = &test_problem_sch1;
+        problemDefinition = &test_problem_shcf;
       }
       break;
   }
@@ -830,11 +835,19 @@ int main(int argc, char **argv)
 
     decode_pop(parent_pop);
 
+    printf("\ndecode_pop done\n");
+
     evaluate_pop(parent_pop);
+
+    printf("\nevaluate_pop done\n");
 
     assign_rank_and_crowding_distance(parent_pop);
 
+    printf("\nrank and crowding distance done\n");
+
     report_pop(parent_pop, fpt1);
+
+    printf("\nreport pop done\n");
 
     if(printAllIndividuals)
     {

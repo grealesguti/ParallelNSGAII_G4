@@ -88,6 +88,11 @@ void test_problem_ctp7(int gen, int indIndex, int nreal, double *xreal, int nbin
 void test_problem_ctp8(int gen, int indIndex, int nreal, double *xreal, int nbin, double *xbin, int *nbits, int **gene, int nobj, double *obj, int ncon, double *constr, const std::vector<std::string>& optionalArgs);
 //24: Six-Hump Camel Function (https://www.sfu.ca/~ssurjano/camel6.html)
 void test_problem_shcf(int gen, int indIndex, int nreal, double *xreal, int nbin, double *xbin, int *nbits, int **gene, int nobj, double *obj, int ncon, double *constr, const std::vector<std::string>& optionalArgs);
+//25: Three-Hump Camel Function (https://www.sfu.ca/~ssurjano/camel3.html)
+void test_problem_thcf(int gen, int indIndex, int nreal, double *xreal, int nbin, double *xbin, int *nbits, int **gene, int nobj, double *obj, int ncon, double *constr, const std::vector<std::string>& optionalArgs);
+//26: Simple parabola
+void test_problem_parab(int gen, int indIndex, int nreal, double *xreal, int nbin, double *xbin, int *nbits, int **gene, int nobj, double *obj, int ncon, double *constr, const std::vector<std::string>& optionalArgs);
+
 
 
 #endif // PROBLEMDEFINITIONS_H
