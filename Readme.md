@@ -30,11 +30,15 @@ systems. Edit the Makefile to suit your need. By default, provided Makefile
 attempts to compile and link all the existing source files into one single
 executable. Comment out the USE_MPI option to disable MPI. Comment out the USE_OPENMP option to disable OpenMP.
 
+The command to use for compilation under Ubuntu 18 is:
+
+	make -f Makefile.chpc
+
 Name of the executable produced is: parallelnsga2r
 
 To run the program type the following:
     
-    mpirun -n x ./parallelnsga2r random_seed <inp_file.in> -p
+	 mpirun -n x ./parallelnsga2r random_seed <inp_file.in> -p
 
 
 where x is the number of MPI processes to use and random_seed is a real number in (0,1) which is used as a seed for random number generator. <inp_file.in> is the problem input file. -p is an optional argument that indicates whether you want to write each individual in the population for each generation to file. Writing for each generation can be costly in terms of simulation times.
