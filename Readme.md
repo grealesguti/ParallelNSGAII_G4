@@ -87,6 +87,7 @@ About the input parameters
     * 23 = CTP8
     * 24 = SCHF : SIX-HUMP CAMEL FUNCTION (https://www.sfu.ca/~ssurjano/camel6.html) 
         sol. f(x^*)=-1.0316 at x^*=(0.0898,-0.7126) \& (-0.0898, 0.7126)
+    * 25 = TCHF : THREE-HUMP CAMEL FUNCTION
 17. remaining lines: will be read as an array of strings (vector<string>&) and passed as an argument to the problem definition
 
 About the output files
