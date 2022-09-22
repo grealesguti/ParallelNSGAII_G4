@@ -1,19 +1,22 @@
+# required libraries link during compilation
 LDLIBS=-lm -ldl
-
+# directory where to look for the NSGAII source code
+OBJDIR=src_NSGAII
 # Makefile for compiling Parellized version of the NSGA-II source code
+# Comment the next 2 lines for sequential compilation
 USE_MPI = ""
 USE_OPENMP = ""
 
 ifdef USE_MPI
- CC=mpicc
- CXX=mpicxx
- LD=mpicxx
- $(info  MPI is enabled)
-else
+ CC=mpicc   # define mpi compiler for c
+ CXX=mpicxx # define mpi compiler for c++
+ LD=mpicxx  
+ $(info  MPI is enabled) # write to screen
+else # defaults
  CC=gcc
  CXX=g++
  LD=g++
- $(info  MPI is disabled)
+ $(info  MPI is disabled) # write to screen
 endif
 
 INCDIRS = -I/uufs/chpc.utah.edu/sys/installdir/intel/compilers_and_libraries_2017.0.098/linux/mpi/include64
@@ -28,18 +31,19 @@ else
  $(info  OpenMP is disabled)
 endif
 
+# command for clean (remove files)
 RM=rm -f
-
 
 CXXFLAGS =-Wall -Werror -pedantic -g $(CUSTOMDEFINES) -std=c++11 $(INCDIRS) -ldl
 LDFLAGS = $(CUSTOMDEFINES) -ldl
 
 OBJS:=$(patsubst %.c,%.o,$(wildcard *.c)) $(patsubst %.cpp,%.o,$(wildcard *.cpp))
 
+# output name of resulting executable
 MAIN=parallelnsga2r
 
 all:$(MAIN)
-$(MAIN):$(OBJS)
+$(MAIN):$(OBJDIR)/$(OBJS)
 	$(LD) $(LDFLAGS) $(OBJS) -o $(MAIN) $(LDLIBS)
 
 %.o: %.c %.cpp global.h rand.h
