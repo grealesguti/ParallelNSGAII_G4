@@ -49,20 +49,18 @@ About the input parameters
 2. ngen: Number of generations
 3. nobj: Number of objectives
 4. ncon: Number of constraints
-5. nreal: Number of real variables
-6. min_realvar[i]: minimum value of i^{th} real variable
-7. max_realvar[i]: maximum value of i^{th} real variable
-9. pcross_real: probability of crossover of real variable
-10. pmut_real: probability of mutation of real variable It is recommended each decision variable is mutated with a probability of 1 / L, where L is the number of decision variables. This results in one mutation per offspring on average.
-13. eta_c: distribution index for real variable SBX crossover
-14. eta_m: distribution index for real variable polynomial mutation
-15. nbin: number of binary variables
-16. nbits[i]: number of bits for i^{th} binary variable
-17. min_binvar[i]: minimum value of i^{th} binary variable
-19. max_binvar[i]: maximum value of i^{th} binary variable
-20. pcross_bin: probability of crossover for binary variable
-21. pmut_bin: probability of mutation for binary variable
-22. problem definition: -t x for one of the test problems or -f <shared_library.in> funcname for a custom problem. Where x in is the index for the test problem and  <shared_library.in> is the path to the shared library, and funcname is the name of the function for the problem definition. The following are the indexes for the test problems
+5. nreal: Number of real design variables
+6. lines (6->6+nreal)min_realvar[i]: minimum value of 'i' real variable  max_realvar[i]: maximum value of 'i' real variable (space separation)
+7. pcross_real: probability of crossover of real variable
+8. pmut_real: probability of mutation of real variable It is recommended each decision variable is mutated with a probability of 1 / L, where L is the number of decision variables. This results in one mutation per offspring on average.
+9. eta_c: distribution index for real variable SBX crossover
+10. eta_m: distribution index for real variable polynomial mutation
+11. nbin: number of binary variables
+12. nbits[i]: number of bits for i^{th} binary variable
+13. (lines 13+nreal->13+nreal+nbits) min_binvar[i]: minimum value of i^{th} binary variable max_binvar[i]: maximum value of i^{th} binary variable (space separation)
+14. pcross_bin: probability of crossover for binary variable
+15. pmut_bin: probability of mutation for binary variable
+16. problem definition: -t x for one of the test problems or -f <shared_library.in> funcname for a custom problem. Where x in is the index for the test problem and  <shared_library.in> is the path to the shared library, and funcname is the name of the function for the problem definition. The following are the indexes for the test problems
     * 0 = SCH1
     * 1 = SCH2
     * 2 = FON
@@ -89,7 +87,7 @@ About the input parameters
     * 23 = CTP8
     * 24 = SCHF : SIX-HUMP CAMEL FUNCTION (https://www.sfu.ca/~ssurjano/camel6.html) 
         sol. f(x^*)=-1.0316 at x^*=(0.0898,-0.7126) \& (-0.0898, 0.7126)
-23. remaining lines: will be read as an array of strings (vector<string>&) and passed as an argument to the problem definition
+17. remaining lines: will be read as an array of strings (vector<string>&) and passed as an argument to the problem definition
 
 About the output files
 ---------------------------------------------------------------------------

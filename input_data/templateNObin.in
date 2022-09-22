@@ -1,0 +1,13 @@
+popsize: This variable stores the population size (a multiple of 4)
+ngen: Number of generations
+nobj: Number of objectives
+ncon: Number of constraints
+nreal: Number of real variables
+line (6--6+nreal): min_realvar[i]: minimum value of i^{th} real variable max_realvar[i]: maximum value of i^{th} real variable
+pcross_real: probability of crossover of real variable
+pmut_real: probability of mutation of real variable It is recommended each decision variable is mutated with a probability of 1 / L, where L is the number of decision variables. This results in one mutation per offspring on average.
+eta_c: distribution index for real variable SBX crossover
+eta_m: distribution index for real variable polynomial mutation
+nbin: number of binary variables == 0
+problem definition: -t x for one of the test problems or -f <shared_library.in> funcname for a custom problem. Where x in is the index for the test problem and <shared_library.in> is the path to the shared library, and funcname is the name of the function for the problem definition.
+remaining lines: will be read as an array of strings to passed as an argument to the problem definition
