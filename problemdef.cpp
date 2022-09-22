@@ -688,7 +688,36 @@ void test_problem_ctp7 (int gen, int indIndex, int nreal, double *xreal, int nbi
 #ifdef ctp8
 void test_problem_ctp8 (int gen, int indIndex, int nreal, double *xreal, int nbin, double *xbin, int *nbits, int **gene, int nobj, double *obj, int ncon, double *constr, const std::vector<std::string>& optionalArgs)
 {
-    obj[0]=(4-2.1*pow(xreal[0],2)+pow(xreal[0],4)/3)*pow(xreal[0],2)+xreal[0]*xreal[1]+(4*pow(xreal[1],2)-4)*pow(xreal[1],2);
+    double g;
+    double theta, a, b, c, d, e;
+    double exp1, exp2;
+    g = 1.0 + xreal[1];
+    obj[0] = xreal[0];
+    obj[1] = g*(1.0  - sqrt(obj[0]/g));
+    theta = 0.1*PI;
+    a = 40.0;
+    b = 0.5;
+    c = 1.0;
+    d = 2.0;
+    e = -2.0;
+    exp1 = (obj[1]-e)*cos(theta) - obj[0]*sin(theta);
+    exp2 = (obj[1]-e)*sin(theta) + obj[0]*cos(theta);
+    exp2 = b*PI*pow(exp2,c);
+    exp2 = fabs(sin(exp2));
+    exp2 = a*pow(exp2,d);
+    constr[0] = exp1/exp2 - 1.0;
+    theta = -0.05*PI;
+    a = 40.0;
+    b = 2.0;
+    c = 1.0;
+    d = 6.0;
+    e = 0.0;
+    exp1 = (obj[1]-e)*cos(theta) - obj[0]*sin(theta);
+    exp2 = (obj[1]-e)*sin(theta) + obj[0]*cos(theta);
+    exp2 = b*PI*pow(exp2,c);
+    exp2 = fabs(sin(exp2));
+    exp2 = a*pow(exp2,d);
+    constr[1] = exp1/exp2 - 1.0;
     return;
 }
 #endif
@@ -717,7 +746,7 @@ void test_problem_shcf (int gen, int indIndex, int nreal, double *xreal, int nbi
     */
     obj[0]=(4-2.1*pow(xreal[0],2)+pow(xreal[0],4)/3)*pow(xreal[0],2)+xreal[0]*xreal[1]+(4*pow(xreal[1],2)-4)*pow(xreal[1],2);
     //obj[0]=2.*pow(xreal[0],2.)-1.05*pow(xreal[0],4.)+pow(xreal[0],6.)/6.+xreal[0]*xreal[1]+pow(xreal[1],2.);
-    obj[1]=1.;
+    //obj[1]=1.;
     //double x1=0.0898;
     //double x2=-0.7126;
     //double objbest=(4-2.1*pow(x1,2)+pow(x1,4)/3)*pow(x1,2)+x1*x2+(4*pow(x2,2)-4)*pow(x2,2);

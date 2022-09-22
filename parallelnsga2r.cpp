@@ -251,12 +251,12 @@ void setProblemDefinitionFromIndex(int problemIndex)
       break;
     case 24:
       {
-        problemDefinition = &test_problem_ctp8;
+        problemDefinition = &test_problem_shcf;
       }
       break;
     default:
       {
-        problemDefinition = &test_problem_shcf;
+        problemDefinition = &test_problem_sch1;
       }
       break;
   }
