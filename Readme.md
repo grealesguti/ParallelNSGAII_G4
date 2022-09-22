@@ -87,7 +87,9 @@ About the input parameters
     * 21 = CTP6
     * 22 = CTP7
     * 23 = CTP8
-23. remaining lines: will be read as an array of strings to passed as an argument to the problem definition
+    * 24 = SCHF : SIX-HUMP CAMEL FUNCTION (https://www.sfu.ca/~ssurjano/camel6.html) 
+        sol. f(x^*)=-1.0316 at x^*=(0.0898,-0.7126) \& (-0.0898, 0.7126)
+23. remaining lines: will be read as an array of strings (vector<string>&) and passed as an argument to the problem definition
 
 About the output files
 ---------------------------------------------------------------------------
@@ -97,24 +99,34 @@ About the output files
 * best_pop.out: This file contains the best solutions obtained at the end of simulation run.
 * params.out: This file contains the information about input parameters as read by the program.
 
-Defining the Test Problem
+How to create your own problem definition
 ---------------------------------------------------------------------------
-Edit the source file problemdef.c to define your test problem. Some sample
-problems (24 test problems from Dr. Deb's book - Multi-Objective Optimization
-using Evolutionary Algorithms) have been provided as examples to guide you
-define your own objective and constraint functions. You can also link other
-source files with the code depending on your need.
-Following points are to be kept in mind while writing objective and constraint
+The files "problemdef.h & problemdef.c" contain the problem header and definition. First copy one of the definitions of the header and change its name, define it at the begining of the .c file and create a new function defintion. The variables used in these functions are:
+	
+* xreal[i]		: 
+* nobj        		: number of objective values
+* obj[i]      		: 'i' objective value
+* ncon        		: number of constraint values
+* constr[i]   	: 'i' constraint value
+* optionalArgs	: Other arguments passed by input file in vectorial string format (vector<string>&)	
+	
+
+The following points need to be kept in mind while writing the objective and constraint
 functions.
 1. The code has been written for minimization of objectives (min f_i). If you want to
 maximize a function, you may use negetive of the function value as the objective value.
 2. A solution is said to be feasible if it does not violate any of the constraints.
 Constraint functions should evaluate to a quantity greater than or equal to zero
-(g_j >= 0), if the solution has to be feasible. A negetive value of constraint means,
-it is being violated.
+(g_j >= 0), if the solution has to be feasible. A negative value of constraint means that the constraint
+it is being violated, it is not a feasible solution.
 3. If there are more than one constraints, it is advisable (though not mandatory)
 to normalize the constraint values by either reformulating them or dividing them
-by a positive non-zero constant.
+by a positive non-zero constant (example TODO). 
+
+Some sample problems (24 test problems from Dr. Deb's book - Multi-Objective Optimization
+using Evolutionary Algorithms) have been provided as examples to guide you
+define your own objective and constraint functions. You can also link other
+source files with the code depending on your need.
 
 About the files
 ---------------------------------------------------------------------------
@@ -139,6 +151,8 @@ About the files
     report.c: Routine to write the population information in a file
     sort.c: Randomized quick sort implementation
     tourselect.c: Tournament selection routine
+
+
 
 ---------------------------------------------------------------------------
 Contact [me](caleb.buahin@usu.edu) with questions or comments.

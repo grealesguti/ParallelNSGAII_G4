@@ -30,6 +30,7 @@
 # define ctp6
 # define ctp7
 # define ctp8
+# define sfcf
 
 /*  Test problem SCH1
     # of real variables = 1
@@ -716,6 +717,34 @@ void test_problem_ctp8 (int gen, int indIndex, int nreal, double *xreal, int nbi
     exp2 = fabs(sin(exp2));
     exp2 = a*pow(exp2,d);
     constr[1] = exp1/exp2 - 1.0;
+    return;
+}
+#endif
+
+#ifdef sfcf
+void test_problem_shcf (int gen, int indIndex, int nreal, double *xreal, int nbin, double *xbin, int *nbits, int **gene, int nobj, double *obj, int ncon, double *constr, const std::vector<std::string>& optionalArgs)
+{
+    /*
+    ### Problem construction
+    This is the first testing problem implemented by 
+        Guillermo Reales Gutiérrez
+        g.realesguti@gmail.com    
+
+    This function solves the unconstrained single objective SIX-HUMP CAMEL FUNCTION (https://www.sfu.ca/~ssurjano/camel6.html):
+        f(x) = \left( 4-2.1x²_1+\frac{x⁴_1}{3}  \right)x²_1+x_1x_2+(-4+4_x²_2)x²_2
+    The global minimum in the range x_1 \in [-3, 3] , x_2 \in [-2, 2] is:
+        f(x^*)=-1.0316 at x^*=(0.0898,-0.7126) \& (-0.0898, 0.7126) 
+
+    ### Input-Output
+    xreal[i]    :
+    nobj        : number of objective values
+    obj[i]      : 'i' objective value
+    ncon        : number of constraint values
+    constr[i]   : 'i' constraint value
+    optionalArgs: Other arguments passed by input file in vectorial string format
+    */
+    obj[0]=(4-2.1*pow(xreal[0],2)+pow(xreal[0],4)/3)*pow(xreal[0],2)+xreal[0]*xreal[1]+(-4+4*pow(xreal[1],2))*pow(xreal[1],2);
+
     return;
 }
 #endif
