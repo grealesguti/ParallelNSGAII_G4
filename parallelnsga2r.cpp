@@ -10,9 +10,9 @@
 #include <vector>
 #include <stdio.h>
 #include <algorithm>
-#include "global.h"
-#include "rand.h"
-#include "problemdef.h"
+#include "src_NSGAII/global.h"
+#include "src_NSGAII/rand.h"
+#include "src_NSGAII/problemdef.h"
 
 #ifdef USE_MPI
 #include <mpi.h>
