@@ -6,6 +6,11 @@
 # include "problemdef.h"
 # include "rand.h"
 # include "global.h"
+
+
+
+
+
 # define sch1
 # define sch2
 # define fon
@@ -822,3 +827,56 @@ void test_problem_parab (int gen, int indIndex, int nreal, double *xreal, int nb
     return;
 }
 #endif
+
+
+#ifdef sfcf
+void G4_test (int gen, int indIndex, int nreal, double *xreal, int nbin, double *xbin, int *nbits, int **gene, int nobj, double *obj, int ncon, double *constr, const std::vector<std::string>& optionalArgs)
+{
+    /*
+    ### Problem construction
+    This is the first testing problem implemented by 
+        Guillermo Reales Gutiérrez
+        g.realesguti@gmail.com    
+
+    This function solves the unconstrained single objective SIX-HUMP CAMEL FUNCTION (https://www.sfu.ca/~ssurjano/camel6.html):
+        f(x) = \left( 4-2.1x²_1+\frac{x⁴_1}{3}  \right)x²_1+x_1x_2+(-4+4_x²_2)x²_2
+    The global minimum in the range x_1 \in [-3, 3] , x_2 \in [-2, 2] is:
+        f(x^*)=-1.0316 at x^*=(0.0898,-0.7126) \& (-0.0898, 0.7126) 
+
+    ### Input-Output
+    xreal[i]    :
+    nobj        : number of objective values
+    obj[i]      : 'i' objective value
+    ncon        : number of constraint values
+    constr[i]   : 'i' constraint value
+    optionalArgs: Other arguments passed by input file in vectorial string format
+    */
+    G4int Onode=5,Znode=2;
+    G4double* radv;
+        radv = new G4double[Onode*(Znode+1)];   
+        G4double Pi=atan(1)*4;
+        G4double DTheta=Pi/(Onode-1);
+        // radius vector initialization
+            for(int i = 0; i < Znode+1; i++){
+                for (int j = 1; j < Onode+1; j++){
+                    if(j==1 || j==3 || j==5){radv[i*Onode-1+j]=3./2.;}
+                    else{radv[i*Onode-1+j]=pow(2*pow(3./2.,2),0.5);}
+                }
+            }
+    G4double Vol = LYSOMeshVolume(radv, Onode,  Znode); // Solution in [mm³]
+    // Volume Calculation 57*3*3=513
+    int argc1=2;
+    char *args[] = {
+        (char*)"sim",
+        (char*)"-NSGAII"
+    };    
+
+    G4simulationNOVIS *sim = new G4simulationNOVIS(argc1, args, Onode, Znode, radv);
+    obj[0]=sim->GetLO_avg(1);
+    //obj[1]=sim->GetLO_std(1);
+    //constr[0]=Vol;
+    return;
+}
+#endif
+
+

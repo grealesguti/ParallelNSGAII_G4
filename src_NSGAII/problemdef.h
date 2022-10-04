@@ -1,9 +1,13 @@
 #ifndef PROBLEMDEFINITIONS_H
 #define PROBLEMDEFINITIONS_H
 
+#include "../../../src_G4/G4simTierII.hh"
+#include "../../../src_G4/util.hh"
 #include <string>
 #include <vector>
 #include "global.h"
+//#include "../../../src_G4/util.hh"
+//#include "../../../src_G4/G4simTierII.hh"
 
 #ifdef USE_MPI
 #include <mpi.h>
@@ -92,7 +96,7 @@ void test_problem_shcf(int gen, int indIndex, int nreal, double *xreal, int nbin
 void test_problem_thcf(int gen, int indIndex, int nreal, double *xreal, int nbin, double *xbin, int *nbits, int **gene, int nobj, double *obj, int ncon, double *constr, const std::vector<std::string>& optionalArgs);
 //26: Simple parabola
 void test_problem_parab(int gen, int indIndex, int nreal, double *xreal, int nbin, double *xbin, int *nbits, int **gene, int nobj, double *obj, int ncon, double *constr, const std::vector<std::string>& optionalArgs);
-
+void G4_test(int gen, int indIndex, int nreal, double *xreal, int nbin, double *xbin, int *nbits, int **gene, int nobj, double *obj, int ncon, double *constr, const std::vector<std::string>& optionalArgs);
 
 
 #endif // PROBLEMDEFINITIONS_H
