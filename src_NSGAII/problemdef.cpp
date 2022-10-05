@@ -852,28 +852,18 @@ void G4_test (int gen, int indIndex, int nreal, double *xreal, int nbin, double 
     optionalArgs: Other arguments passed by input file in vectorial string format
     */
     G4int Onode=5,Znode=2;
-    G4double* radv;
-        radv = new G4double[Onode*(Znode+1)];   
-        G4double Pi=atan(1)*4;
-        G4double DTheta=Pi/(Onode-1);
-        // radius vector initialization
-            for(int i = 0; i < Znode+1; i++){
-                for (int j = 1; j < Onode+1; j++){
-                    if(j==1 || j==3 || j==5){radv[i*Onode-1+j]=3./2.;}
-                    else{radv[i*Onode-1+j]=pow(2*pow(3./2.,2),0.5);}
-                }
-            }
-    G4double Vol = LYSOMeshVolume(radv, Onode,  Znode); // Solution in [mm³]
+    //G4double Vol = LYSOMeshVolume(radv, Onode,  Znode); // Solution in [mm³]
     // Volume Calculation 57*3*3=513
-    int argc1=2;
+    int argc1=3;
     char *args[] = {
         (char*)"sim",
-        (char*)"-NSGAII"
+        (char*)"-NSGAII",
+        (char*)"-rad2Y"
     };    
 
-    G4simulationNOVIS *sim = new G4simulationNOVIS(argc1, args, Onode, Znode, radv);
-    obj[0]=sim->GetLO_avg(1);
-    //obj[1]=sim->GetLO_std(1);
+    G4simulationNOVIS *sim = new G4simulationNOVIS(argc1, args, Onode, Znode, xreal);
+    obj[0]=sim->GetLD_avg(1);
+    obj[1]=sim->GetLD_std(1);
     //constr[0]=Vol;
     return;
 }
